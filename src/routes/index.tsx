@@ -99,7 +99,7 @@ export default function Home() {
       });
     };
 
-    const observer = new IntersectionObserver(changeNav, { threshold: [0.9, 1] });
+    const observer = new IntersectionObserver(changeNav, { threshold: [0, 1] });
 
     sections.forEach((section) => observer.observe(section));
 
