@@ -6,7 +6,7 @@ export default function NotFound() {
     <main>
       <Title>Not Found</Title>
       <HttpStatusCode code={404} />
-      <div class="mx-auto min-h-screen max-w-screen-xl px-6 py-12 font-sans md:px-12 md:py-20 lg:px-24 lg:py-0">
+      <div class="mx-auto min-h-screen max-w-screen-xl px-6 py-12 font-sans md:px-12 md:py-20 lg:px-12 xl:px-24 lg:py-0">
         <div class="flex h-screen flex-col items-center justify-center text-center">
           <div>
             <h1 class="mr-5 inline-block border-r border-r-white/30 pr-6 align-top text-2xl font-medium leading-[49px]">

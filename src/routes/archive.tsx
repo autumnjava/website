@@ -30,7 +30,7 @@ export default function ProjectsArchive() {
   return (
     <main>
       <Title>Projects archive</Title>
-      <div class="mx-auto min-h-screen max-w-screen-xl px-6 py-12 font-sans md:px-12 md:py-20 lg:px-24 lg:py-0">
+      <div class="mx-auto min-h-screen max-w-screen-xl px-6 py-12 font-sans md:px-12 md:py-20 lg:px-12 xl:px-24 lg:py-0">
         <div class="lg:py-24">
           <a
             class="group mb-2 inline-flex items-center font-semibold leading-tight text-accentGreen"
