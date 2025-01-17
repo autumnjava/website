@@ -7,8 +7,6 @@ html {
 }
 
 body {
-  font-family: Gordita, Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
-    'Helvetica Neue', sans-serif;
   min-height: 100vh;
 }
 
@@ -20,4 +18,21 @@ body {
 .active .nav-text {
   --tw-text-opacity: 1;
   color: rgb(226 232 240 / var(--tw-text-opacity));
+}
+
+@layer base {
+  @font-face {
+    font-family: Inter;
+    src:
+      url(/fonts/Inter-Regular.woff2) format('woff2'),
+      url(/fonts/Inter-Regular.woff) format('woff'),
+      url(/fonts/Inter-Regular.ttf) format('truetext');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  html {
+   font-family: Inter, system-ui, sans-serif, Arial;
+  }
 }
