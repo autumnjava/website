@@ -1,9 +1,31 @@
 import { Title } from '@solidjs/meta';
-import { createResource, For, Match, Suspense, Switch } from 'solid-js';
+import {
+  createMemo,
+  createResource,
+  For,
+  Match,
+  Suspense,
+  Switch,
+} from 'solid-js';
 import ArrowLeftIcon from '~/components/icons/ArrowLeft';
 import ArrowUpRightIcon from '~/components/icons/ArrowUpRight';
 
-const fetchProjects = async () => {
+type Project = {
+  _id: string;
+  builtWith: string[];
+  made_at: string;
+  name: string;
+  slug: { current: string; _type: string };
+  url: string;
+  year: string;
+};
+
+type SanityQueryResult<T> = {
+  query: string;
+  result: T[];
+};
+
+const fetchProjects = async (): Promise<SanityQueryResult<Project>> => {
   const project_id = 'wrqfno0w';
   const dataset = 'production';
 
@@ -25,8 +47,15 @@ const fetchProjects = async () => {
 };
 
 export default function ProjectsArchive() {
-  // TODO: fix types
   const [projects] = createResource(fetchProjects);
+
+  const sortedProjects = createMemo(() => {
+    const data = projects();
+
+    if (!data || !data.result) return [];
+
+    return data.result.sort((a, b) => Number(b.year) - Number(a.year));
+  });
 
   return (
     <main>
@@ -49,7 +78,7 @@ export default function ProjectsArchive() {
               <Match when={projects.error}>
                 <span>Error: {projects.error.message}</span>
               </Match>
-              <Match when={projects()}>
+              <Match when={sortedProjects()}>
                 <table
                   id="content"
                   class="mt-12 w-full border-collapse text-left"
@@ -74,10 +103,7 @@ export default function ProjectsArchive() {
                     </tr>
                   </thead>
                   <tbody>
-                    <For
-                      // TODO: fix types
-                      each={projects().result.sort((a, b) => b.year - a.year)}
-                    >
+                    <For each={sortedProjects()}>
                       {(project) => (
                         <tr class="border-b border-slate-300/10 last:border-none">
                           <td class="py-4 pr-4 align-top text-sm">
