@@ -25,12 +25,13 @@ const fetchProjects = async () => {
 };
 
 export default function ProjectsArchive() {
+  // TODO: fix types
   const [projects] = createResource(fetchProjects);
 
   return (
     <main>
       <Title>Projects archive</Title>
-      <div class="mx-auto min-h-screen max-w-screen-xl px-6 py-12 font-sans md:px-12 md:py-20 lg:px-12 xl:px-24 lg:py-0">
+      <div class="font-sans mx-auto min-h-screen max-w-screen-xl px-6 py-12 md:px-12 md:py-20 lg:px-12 lg:py-0 xl:px-24">
         <div class="lg:py-24">
           <a
             class="group mb-2 inline-flex items-center font-semibold leading-tight text-accentGreen"
@@ -53,7 +54,7 @@ export default function ProjectsArchive() {
                   id="content"
                   class="mt-12 w-full border-collapse text-left"
                 >
-                  <thead class="sticky top-0 z-10 border-b border-slate-100/10 bg-oliveGreen/75 px-6 py-5 backdrop-blur">
+                  <thead class="bg-oliveGreen/75 sticky top-0 z-10 border-b border-slate-100/10 px-6 py-5 backdrop-blur">
                     <tr>
                       <th class="py-4 pr-8 text-sm font-semibold text-slate-200">
                         Year
@@ -73,7 +74,10 @@ export default function ProjectsArchive() {
                     </tr>
                   </thead>
                   <tbody>
-                    <For each={projects().result}>
+                    <For
+                      // TODO: fix types
+                      each={projects().result.sort((a, b) => b.year - a.year)}
+                    >
                       {(project) => (
                         <tr class="border-b border-slate-300/10 last:border-none">
                           <td class="py-4 pr-4 align-top text-sm">
@@ -98,7 +102,7 @@ export default function ProjectsArchive() {
                             <ul class="flex flex-wrap gap-2">
                               <For each={project.builtWith}>
                                 {(technology: string) => (
-                                  <li class="rounded-full px-3 py-1 text-xs font-medium bg-lightGreen/10 text-accentGreen">
+                                  <li class="rounded-full bg-lightGreen/10 px-3 py-1 text-xs font-medium text-accentGreen">
                                     {technology}
                                   </li>
                                 )}
